@@ -8,6 +8,5 @@
   via `studio.<locale>.yaml`. The classic (ExtJS) admin panel and its translations are removed; Pimcore 2026 ships
   Studio only.
 - `karser/payum-saferpay` raised to `^0.5`.
-- Requires `coreshop/enterprise-subscription-bundle` (registered as dependent bundle).
 - Form type renamed to `SaferpayGatewayConfigurationType`; `ConvertPaymentExtension` and `RefundEvent` got typed
   signatures.
