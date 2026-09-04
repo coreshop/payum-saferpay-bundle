@@ -1,0 +1,10 @@
+# Refund the Saferpay transaction when a payment is refunded in CoreShop.
+core_shop_workflow:
+    state_machine:
+        coreshop_payment:
+            callbacks:
+                after:
+                    refund_payment:
+                        on: ['refund']
+                        do: ['@CoreShop\Payum\SaferpayBundle\Event\RefundEvent', 'refund']
+                        args: ['object']

@@ -1,0 +1,55 @@
+{% extends '@CoreShopFrontend/Order/layout.html.twig' %}
+{% import "@CoreShopFrontend/Common/Macro/messages.html.twig" as messages %}
+{% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% do pimcore_head_title().set('coreshop.ui.order_deposit'|trans) %}
+
+{% block order %}
+    {% if order.paymentState in ['partially_paid'] %}
+        {% set showShipping = true %}
+        {% set snippet = '' %}
+        {% set label = 'coreshop.form.order.deposit.submit_payment' %}
+
+        {{ form_start(form, {'action': path('coreshop_order_deposit', {'token': order.token}), 'attr': {'novalidate': 'novalidate'}}) }}
+
+        {{ form_row(form.paymentProvider) }}
+
+        <div class="paymentSettings">
+            {% if form.paymentSettings is defined %}
+                {% for field in form.paymentSettings %}
+                    {{ form_row(field) }}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% for name, paymentSettingConfigurationPrototype in form.vars.prototypes %}
+            <div id="{{ form.paymentProvider.vars.id }}_{{ name }}" data-container=".configuration"
+                 data-prototype="{{ form_widget(paymentSettingConfigurationPrototype)|e }}">
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-push-4">
+                {{ form_widget(form.submitPayment, {label: label, attr: {class: 'btn btn-success w-100'}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-push-4">
+                <br/>
+                {% if document is defined and document.property('contactPage') is pimcore_document_page %}
+                    <a class="btn btn-gray w-100" href="{{ document.property('contactPage') }}">{{ 'contact_us'|trans }}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {{ form_end(form, {'render_rest': false}) }}
+
+        <div class="mt-10">
+            {% include '@CoreShopFrontend/Common/order_detail.html.twig' with {order: order, showShipping: showShipping, snippet: snippet} only %}
+        </div>
+    {% else %}
+        {{ messages.info('coreshop.ui.order_deposit_payment_not_allowed') }}
+    {% endif %}
+{% endblock %}

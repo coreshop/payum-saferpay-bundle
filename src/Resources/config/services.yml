@@ -1,0 +1,30 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    CoreShop\Payum\SaferpayBundle\Extension\ConvertPaymentExtension:
+        tags:
+            - { name: payum.extension, alias: saferpay_language_extension, factory: saferpay, gateway: saferpay, prepend: false }
+
+    CoreShop\Payum\SaferpayBundle\Form\Type\SaferpayOptionalParametersType:
+        tags:
+            - { name: form.type }
+
+    CoreShop\Payum\SaferpayBundle\Form\Type\SaferpayGatewayConfigurationType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: saferpay }
+            - { name: form.type }
+            - { name: coreshop.studio_form }
+
+    CoreShop\Payum\SaferpayBundle\Event\RefundEvent:
+        public: true
+        arguments:
+            - '@payum'
+
+    payum.saferpay_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [Karser\PayumSaferpay\SaferpayGatewayFactory]
+        tags:
+            - { name: payum.gateway_factory_builder, factory: saferpay }

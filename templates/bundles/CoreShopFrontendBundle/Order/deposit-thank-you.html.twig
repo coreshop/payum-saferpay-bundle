@@ -1,0 +1,22 @@
+{% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
+{% extends '@CoreShopFrontend/Order/layout.html.twig' %}
+
+{% do pimcore_head_title().set('zeroridge.deposit_confirmation'|trans) %}
+
+{% block content %}
+    <div id="opc-all-steps">
+        <div id="checkout-opc">
+            <div class="alert alert-success">
+                <strong>{{ 'coreshop.deposit_confirmation'|trans }}</strong><br/>
+                {{ 'order_deposit_succesfull'|trans }}<br/>
+                <ul class="list list-unstyled">
+                    {{ 'order_number'|trans }} {{ order.orderNumber }}
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                {% include '@CoreShopFrontend/Common/order_detail.html.twig' with {order: order, showDeposit: false} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,44 +1,66 @@
 {
-    "name": "coreshop/payum-saferpay-bundle",
-    "type": "pimcore-bundle",
-    "description": "CoreShop - Saferpay Bundle",
-    "keywords": [
-        "coreshop",
-        "pimcore",
-        "ecommerce",
-        "saferpay"
-    ],
-    "homepage": "http://www.coreshop.org",
-    "license": "GPL-3.0-or-later",
-    "authors": [
-        {
-            "name": "DACHCOM.DIGITAL Stefan Hagspiel",
-            "email": "shagspiel@dachcom.ch",
-            "homepage": "http://www.dachcom.com/",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^7.2|^8.0",
-        "karser/payum-saferpay": "^0.3",
-        "coreshop/core-shop": "^2.2|^3.0|^4.0"
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "autoload": {
-        "psr-4": {
-            "CoreShop\\Payum\\SaferpayBundle\\": "src/CoreShop/Payum/Saferpay"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        },
-        "pimcore": {
-            "bundles": [
-                "CoreShop\\Payum\\SaferpayBundle\\SaferpayBundle"
-            ]
-        }
+  "name": "coreshop/payum-saferpay-bundle",
+  "type": "pimcore-bundle",
+  "description": "CoreShop - Saferpay payment gateway (Payum)",
+  "keywords": [
+    "coreshop",
+    "pimcore",
+    "ecommerce",
+    "payment",
+    "saferpay",
+    "payum"
+  ],
+  "homepage": "https://www.coreshop.com",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "CoreShop GmbH",
+      "email": "info@coreshop.com",
+      "homepage": "https://www.coreshop.com/",
+      "role": "TEAM"
     }
+  ],
+  "require": {
+    "php": "~8.4.0 || ~8.5.0",
+    "coreshop/core-shop": "2026.x-dev",
+    "coreshop/enterprise-subscription-bundle": "^2026.2",
+    "karser/payum-saferpay": "^0.5"
+  },
+  "require-dev": {
+    "coreshop/test-setup": "1.0.x-dev",
+    "pimcore/studio-ui-bundle": "^2026.2.1",
+    "symfony/runtime": "^6.4 || ^7.0"
+  },
+  "suggest": {
+    "pimcore/studio-ui-bundle": "^2026.2 - Pimcore Studio UI, required to configure the gateway in the backend"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/runtime": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "CoreShop\\Payum\\SaferpayBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "Kernel.php"
+    ],
+    "psr-4": {
+      "Pimcore\\Model\\DataObject\\": "var/classes/DataObject"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "CoreShop\\Payum\\SaferpayBundle\\SaferpayBundle"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
