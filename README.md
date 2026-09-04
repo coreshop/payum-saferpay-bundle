@@ -6,10 +6,6 @@ Adds the [Saferpay](https://www.saferpay.com) payment gateway to CoreShop throug
 Payment Page and the Transaction interface, automatic language selection from the order locale, and refunds through
 the CoreShop payment workflow.
 
-This bundle requires a CoreShop enterprise subscription: `coreshop/enterprise-subscription-bundle` is installed
-automatically and `CORESHOP_ENTERPRISE_TOKEN` must be configured (see
-[coreshop/enterprise-subscription-bundle](https://github.com/coreshop/enterprise-subscription-bundle)).
-
 ## Version lines
 
 | Branch   | CoreShop | Pimcore | PHP       | Admin                 |
