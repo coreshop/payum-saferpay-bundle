@@ -1,0 +1,16 @@
+# Classic (ExtJS) admin: gateway configuration panel of the payment provider editor.
+core_shop_payment:
+    pimcore_admin:
+        js:
+            saferpay: /bundles/saferpay/pimcore/js/saferpay.js
+
+# Refund the Saferpay transaction when a payment is refunded in CoreShop.
+core_shop_workflow:
+    state_machine:
+        coreshop_payment:
+            callbacks:
+                after:
+                    refund_payment:
+                        on: ['refund']
+                        do: ['@CoreShop\Payum\SaferpayBundle\Event\RefundEvent', 'refund']
+                        args: ['object']
