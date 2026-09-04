@@ -17,15 +17,12 @@ declare(strict_types=1);
 
 namespace CoreShop\Payum\SaferpayBundle;
 
-use CoreShop\Bundle\EnterpriseSubscriptionBundle\CoreShopEnterpriseSubscriptionBundle;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\PimcoreBundleAdminClassicInterface;
 use Pimcore\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
-use Pimcore\HttpKernel\Bundle\DependentBundleInterface;
-use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 
-final class SaferpayBundle extends AbstractPimcoreBundle implements DependentBundleInterface, PimcoreBundleAdminClassicInterface
+final class SaferpayBundle extends AbstractPimcoreBundle implements PimcoreBundleAdminClassicInterface
 {
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
@@ -43,11 +40,6 @@ final class SaferpayBundle extends AbstractPimcoreBundle implements DependentBun
     protected function getComposerPackageName(): string
     {
         return 'coreshop/payum-saferpay-bundle';
-    }
-
-    public static function registerDependentBundles(BundleCollection $collection): void
-    {
-        $collection->addBundle(new CoreShopEnterpriseSubscriptionBundle());
     }
 
     /**
