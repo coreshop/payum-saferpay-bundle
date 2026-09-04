@@ -7,6 +7,5 @@
   the optional PaymentPage parameters are a nested form (`SaferpayOptionalParametersType`), labels are translated
   via `studio.<locale>.yaml`. The classic (ExtJS) admin panel is still shipped.
 - `karser/payum-saferpay` raised to `^0.5`.
-- Requires `coreshop/enterprise-subscription-bundle` (registered as dependent bundle).
 - Form type renamed to `SaferpayGatewayConfigurationType`; `ConvertPaymentExtension` and `RefundEvent` got typed
   signatures.
